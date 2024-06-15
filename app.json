@@ -1,5 +1,6 @@
 {
   "expo": {
+    "entryPoint": "./path/to/AppWrapper.js",
     "name": "drone-project",
     "slug": "drone-project",
     "version": "1.0.0",
