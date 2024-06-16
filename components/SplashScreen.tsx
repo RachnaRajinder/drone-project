@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { View, Text, StyleSheet, Image, Animated } from "react-native";
 
+
 const SplashScreen = ({ navigation }) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
@@ -14,7 +15,7 @@ const SplashScreen = ({ navigation }) => {
 
     // Navigate to Home after 3 seconds
     const timer = setTimeout(() => {
-      navigation.navigate("Home");
+      navigation.navigate("SignUpScreen");
     }, 3000);
 
     // Cleanup the timer on component unmount
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   highlight: {
-    color: "#F0935F", // Change to your preferred color for "FLY HIGH"
+    color: "#F0935F",
   },
 });
 
