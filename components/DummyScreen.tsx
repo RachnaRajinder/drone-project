@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import TextComponent from "./TextComponent";
 import ButtonComponent from "./ButtonComponent";
 
-const HomeScreen = () => {
+const DummyScreen = () => {
   return (
     <View style={styles.container}>
       {/* Transparent Semi-Circle Background */}
@@ -16,7 +16,7 @@ const HomeScreen = () => {
           <TextComponent style={styles.title}>SkySight 3</TextComponent>
         </View>
         <View style={styles.header2}>
-          <Ionicons name="person-circle-outline" size={35} color="#ED6C30" />
+          <Ionicons name="person-circle-outline" size={35} color="white" />
         </View>
       </View>
       {/* sub header */}
@@ -41,21 +41,16 @@ const HomeScreen = () => {
           <Ionicons name="location" size={35} color="white" />
         </View>
       </View>
-      <View style={styles.descriptionContainer}>
-        <TextComponent style={styles.descriptionWhite}>
-          START RECORDING {"\n"}VIDEO
-        </TextComponent>
-        <TextComponent style={styles.descriptionOrange}>
-          {"\n"}FROM AN EAGLE EYE
-        </TextComponent>
-      </View>
+      <TextComponent style={styles.description}>
+        START RECORDING {"\n"} VIDEO{"\n"} FROM AN EAGLE EYE
+      </TextComponent>
       {/* sub body*/}
       <View style={styles.body}>
         <View style={styles.section1}>
           <ButtonComponent
             title="Fly Now"
             iconName="airplane-outline"
-            style={styles.FlyButton}
+            style={styles.connectButton}
             textStyle={styles.connectButtonText}
             onPress={() => alert("Fly Now")}
           />
@@ -69,17 +64,32 @@ const HomeScreen = () => {
       </View>
       {/* footer */}
       <View style={styles.footer}>
-        <View style={styles.footerIcon}>
-          <Ionicons name="home" size={35} color="white" />
+        <View style={styles.footer1}>
+          <ButtonComponent
+            title="Home"
+            iconName="home"
+            style={styles.footerButton}
+            textStyle={styles.footerButtonText}
+            onPress={() => alert("Home")}
+          />
         </View>
-        <View style={styles.footerIcon}>
-          <Ionicons name="settings" size={35} color="white" />
+        <View style={styles.footer2}>
+          <ButtonComponent
+            title=""
+            iconName="add"
+            style={styles.plusButton}
+            textStyle={styles.plusButtonText}
+            onPress={() => alert("press plus")}
+          />
         </View>
-        <View style={styles.footerIcon}>
-          <Ionicons name="document" size={35} color="white" />
-        </View>
-        <View style={styles.footerIcon}>
-          <Ionicons name="analytics" size={35} color="white" />
+        <View style={styles.footer3}>
+          <ButtonComponent
+            title="Setting"
+            iconName="settings"
+            style={styles.footerButton}
+            textStyle={styles.footerButtonText}
+            onPress={() => alert("Setting")}
+          />
           <View style={styles.semiCircleBottom} />
         </View>
       </View>
@@ -124,7 +134,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   droneImage: {
-    width: 280, // Adjust width to better fit the layout
+    width: 250, // Adjust width to better fit the layout
     height: 250, // Set an explicit height for better control
     resizeMode: "contain",
     transform: [{ rotate: "30deg" }],
@@ -143,54 +153,36 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   connectButton: {
-    backgroundColor: "transparent", // Make background transparent
-    borderWidth: 1, // Set border width
-    borderColor: "white", // Set border color
-    borderRadius: 25,
+    backgroundColor: "#555",
+    right: 10,
+    borderRadius: 20,
     width: 200,
     marginLeft: 40,
-    paddingVertical: 10, // Add padding for better touch target
   },
   connectButtonText: {
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
   },
-  FlyButton: {
-    backgroundColor: "#F0935F",
-    right: 10,
-    borderRadius: 20,
-    width: 200,
-    marginLeft: 40,
-  },
   section2: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
-  descriptionContainer: {
+  description: {
+    textAlign: "right",
     marginVertical: 20,
+    fontSize: 20,
+    fontWeight: "bold",
     marginHorizontal: 20,
-    marginLeft: 30,
-  },
-  descriptionWhite: {
-    color: "white",
-    fontSize: 25,
-    fontWeight: "bold",
-  },
-  descriptionOrange: {
-    color: "#ED6C30",
-    fontSize: 25,
-    fontWeight: "bold",
-    marginTop: "-10%",
   },
   batteryStatus: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#ED6C30",
+    backgroundColor: "red",
     paddingVertical: 5,
     paddingHorizontal: 10,
-    borderRadius: 10,
+    borderRadius: 5,
   },
   batteryText: {
     color: "white",
@@ -209,18 +201,44 @@ const styles = StyleSheet.create({
     transform: [{ scaleX: 2 }],
   },
   footer: {
-    backgroundColor: "black",
     flexDirection: "row",
-    justifyContent: "center", // Center the icons horizontally
+    justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingBottom: 20,
   },
-  footerIcon: {
+  footer1: {
+    flex: 2,
+    alignItems: "center",
+  },
+  footer2: {
     flex: 1,
     alignItems: "center",
+  },
+  plusButton: {
+    backgroundColor: "orange",
+    borderRadius: 60,
+    width: 60,
+    height: 60,
     justifyContent: "center",
-    top: 10,
+    alignItems: "center",
+  },
+  plusButtonText: {
+    color: "black",
+  },
+  footer3: {
+    flex: 2,
+    alignItems: "center",
+  },
+  footerButton: {
+    alignItems: "center",
+    backgroundColor: "orange",
+    borderRadius: 5,
+    width: 100,
+  },
+  footerButtonText: {
+    color: "white",
   },
 });
 
-export default HomeScreen;
+export default DummyScreen;
+

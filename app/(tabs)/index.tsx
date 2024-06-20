@@ -5,11 +5,13 @@ import SplashScreen from "../../components/SplashScreen";
 import HomeScreen from "../../components/HomeScreen";
 import SignUpScreen from "../../components/SignUpScreen";
 import SignInScreen from "../../components/SignInScreen";
+import DummyScreen from "@/components/DummyScreen";
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
-      <Stack.Navigator initialRouteName="Splash">
+      <Stack.Navigator initialRouteName="Dummy">
+
         <Stack.Screen
           name="Splash"
           component={SplashScreen}
