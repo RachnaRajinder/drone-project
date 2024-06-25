@@ -3,8 +3,11 @@ import { StyleSheet, View, Image, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import TextComponent from "./TextComponent";
 import ButtonComponent from "./ButtonComponent";
+import { useNavigation } from "@react-navigation/native";
+
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       {/* Transparent Semi-Circle Background */}
@@ -16,7 +19,9 @@ const HomeScreen = () => {
           <TextComponent style={styles.title}>SkySight 3</TextComponent>
         </View>
         <View style={styles.header2}>
-          <Ionicons name="person-circle-outline" size={35} color="#ED6C30" />
+          <Ionicons name="person-circle-outline" size={35} color="#ED6C30"
+            onPress={() => alert("Profile")}
+           />
         </View>
       </View>
       {/* sub header */}
@@ -70,17 +75,19 @@ const HomeScreen = () => {
       {/* footer */}
       <View style={styles.footer}>
         <View style={styles.footerIcon}>
-          <Ionicons name="home" size={35} color="white" />
+          <Ionicons name="home" size={35} color="white" onPress={() => alert("Home")} />
         </View>
         <View style={styles.footerIcon}>
-          <Ionicons name="settings" size={35} color="white" />
+          <Ionicons name="settings" size={35} color="white" onPress={() => alert("Settings")} />
         </View>
         <View style={styles.footerIcon}>
-          <Ionicons name="document" size={35} color="white" />
+          <Ionicons 
+            name="document" size={35} color="white"
+            onPress={() => navigation.navigate("VideoListScreen")}
+          />
         </View>
         <View style={styles.footerIcon}>
-          <Ionicons name="analytics" size={35} color="white" />
-          <View style={styles.semiCircleBottom} />
+          <Ionicons name="analytics" size={35} color="white" onPress={() => alert("Analytics")} />
         </View>
       </View>
     </View>
@@ -162,6 +169,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: 200,
     marginLeft: 40,
+    paddingVertical: 10, // Add padding for better touch target
   },
   section2: {
     flex: 1,
@@ -196,17 +204,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
     marginLeft: 5,
-  },
-  semiCircleBottom: {
-    position: "absolute",
-    bottom: -21, // Adjust as needed
-    right: -10, // Adjust as needed
-    width: 250,
-    height: 250,
-    backgroundColor: "rgba(255, 255, 255, 0.2)", // Semi-transparent background
-    borderTopLeftRadius: 150,
-    borderTopRightRadius: 150,
-    transform: [{ scaleX: 2 }],
   },
   footer: {
     backgroundColor: "black",
