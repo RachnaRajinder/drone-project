@@ -19,7 +19,7 @@ const HomeScreen = () => {
           <TextComponent style={styles.title}>SkySight 3</TextComponent>
         </View>
         <View style={styles.header2}>
-          <Ionicons name="person-circle-outline" size={35} color="#ED6C30"
+          <Ionicons name="person-circle-outline" size={35} color="white"
             onPress={() => alert("Profile")}
            />
         </View>
@@ -62,7 +62,7 @@ const HomeScreen = () => {
             iconName="airplane-outline"
             style={styles.FlyButton}
             textStyle={styles.connectButtonText}
-            onPress={() => alert("Fly Now")}
+            onPress={() => navigation.navigate("FlyScreen")}
           />
         </View>
         <View style={styles.section2}>
@@ -151,8 +151,8 @@ const styles = StyleSheet.create({
   },
   connectButton: {
     backgroundColor: "transparent", // Make background transparent
-    borderWidth: 1, // Set border width
-    borderColor: "white", // Set border color
+    borderWidth: 2, // Set border width
+    borderColor: "#F0935F", // Set border color
     borderRadius: 25,
     width: 200,
     marginLeft: 40,
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   descriptionOrange: {
-    color: "#ED6C30",
+    color: "grey",
     fontSize: 25,
     fontWeight: "bold",
     marginTop: "-10%",
@@ -195,10 +195,12 @@ const styles = StyleSheet.create({
   batteryStatus: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#ED6C30",
-    paddingVertical: 5,
+    backgroundColor: "#444",
+    paddingVertical: 6,
     paddingHorizontal: 10,
     borderRadius: 10,
+    borderWidth: 2, // Set border width
+    borderColor: "#F0935F", // Set border color
   },
   batteryText: {
     color: "white",
