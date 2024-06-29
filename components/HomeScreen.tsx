@@ -4,10 +4,13 @@ import { Ionicons } from "@expo/vector-icons";
 import TextComponent from "./TextComponent";
 import ButtonComponent from "./ButtonComponent";
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
+import ModalScreen from "./ModalScreen";
 
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+  const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.container}>
       {/* Transparent Semi-Circle Background */}
@@ -19,9 +22,12 @@ const HomeScreen = () => {
           <TextComponent style={styles.title}>SkySight 3</TextComponent>
         </View>
         <View style={styles.header2}>
-          <Ionicons name="person-circle-outline" size={35} color="white"
-            onPress={() => alert("Profile")}
-           />
+          <Ionicons
+            name="person-circle-outline"
+            size={35}
+            color="white"
+            onPress={() => setModalVisible(true)}
+          />
         </View>
       </View>
       {/* sub header */}
@@ -75,21 +81,43 @@ const HomeScreen = () => {
       {/* footer */}
       <View style={styles.footer}>
         <View style={styles.footerIcon}>
-          <Ionicons name="home" size={35} color="white" onPress={() => alert("Home")} />
+          <Ionicons
+            name="home"
+            size={35}
+            color="white"
+            onPress={() => alert("Home")}
+          />
         </View>
         <View style={styles.footerIcon}>
-          <Ionicons name="settings" size={35} color="white" onPress={() => alert("Settings")} />
+          <Ionicons
+            name="settings"
+            size={35}
+            color="white"
+            onPress={() => alert("Settings")}
+          />
         </View>
         <View style={styles.footerIcon}>
-          <Ionicons 
-            name="document" size={35} color="white"
+          <Ionicons
+            name="document"
+            size={35}
+            color="white"
             onPress={() => navigation.navigate("VideoListScreen")}
           />
         </View>
         <View style={styles.footerIcon}>
-          <Ionicons name="analytics" size={35} color="white" onPress={() => alert("Analytics")} />
+          <Ionicons
+            name="analytics"
+            size={35}
+            color="white"
+            onPress={() => alert("Analytics")}
+          />
         </View>
       </View>
+      {/* Modal Component */}
+      <ModalScreen
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
     </View>
   );
 };

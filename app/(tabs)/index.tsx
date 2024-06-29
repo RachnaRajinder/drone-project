@@ -7,6 +7,7 @@ import SignInScreen from "../../components/SignInScreen";
 import VideoListScreen from "@/components/VideoListScreen";
 import FlyScreen from "@/components/FlyScreen";
 import DroneDetailScreen from "@/components/DroneDetailScreen";
+import ModalScreen from "@/components/ModalScreen";
 
 const Stack = createStackNavigator();
 
@@ -46,6 +47,11 @@ const App = () => {
       <Stack.Screen
         name="DroneDetailScreen"
         component={DroneDetailScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ModelScreen"
+        component={ModalScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
