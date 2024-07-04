@@ -6,6 +6,8 @@ import ButtonComponent from "./ButtonComponent";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import ModalScreen from "./ModalScreen";
+import MapScreen from "./MapScreen";
+
 
 
 const HomeScreen = () => {
@@ -49,7 +51,12 @@ const HomeScreen = () => {
           />
         </View>
         <View style={styles.section2}>
-          <Ionicons name="location" size={35} color="white" />
+          <Ionicons
+            name="location"
+            size={35}
+            color="white"
+            onPress={() => navigation.navigate("MapScreen")}
+          />
         </View>
       </View>
       <View style={styles.descriptionContainer}>

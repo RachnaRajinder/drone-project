@@ -8,14 +8,16 @@ import VideoListScreen from "@/components/VideoListScreen";
 import FlyScreen from "@/components/FlyScreen";
 import DroneDetailScreen from "@/components/DroneDetailScreen";
 import ModalScreen from "@/components/ModalScreen";
+import MapScreen from "@/components/MapScreen";
+
 
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <Stack.Navigator initialRouteName="Splash">
+    <Stack.Navigator initialRouteName="SplashScreen">
       <Stack.Screen
-        name="Splash"
+        name="SplashScreen"
         component={SplashScreen}
         options={{ headerShown: false }}
       />
@@ -52,6 +54,11 @@ const App = () => {
       <Stack.Screen
         name="ModelScreen"
         component={ModalScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="MapScreen"
+        component={MapScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
