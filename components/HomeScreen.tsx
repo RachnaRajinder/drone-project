@@ -5,9 +5,7 @@ import TextComponent from "./TextComponent";
 import ButtonComponent from "./ButtonComponent";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
-import ModalScreen from "./ModalScreen";
-import MapScreen from "./MapScreen";
-
+import ModalScreen from "./ModalComponent";
 
 
 const HomeScreen = () => {
@@ -100,7 +98,7 @@ const HomeScreen = () => {
             name="settings"
             size={35}
             color="white"
-            onPress={() => alert("Settings")}
+            onPress={() => navigation.navigate("SettingScreen")}
           />
         </View>
         <View style={styles.footerIcon}>
@@ -116,7 +114,7 @@ const HomeScreen = () => {
             name="analytics"
             size={35}
             color="white"
-            onPress={() => alert("Analytics")}
+            onPress={() => navigation.navigate("AnalysisScreen")}
           />
         </View>
       </View>

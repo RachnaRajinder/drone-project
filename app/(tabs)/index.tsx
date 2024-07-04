@@ -7,9 +7,9 @@ import SignInScreen from "../../components/SignInScreen";
 import VideoListScreen from "@/components/VideoListScreen";
 import FlyScreen from "@/components/FlyScreen";
 import DroneDetailScreen from "@/components/DroneDetailScreen";
-import ModalScreen from "@/components/ModalScreen";
 import MapScreen from "@/components/MapScreen";
-
+import SettingScreen from "@/components/SettingScreen";
+import AnalysisScreen from "@/components/AnalysisScreen";
 
 const Stack = createStackNavigator();
 
@@ -52,13 +52,18 @@ const App = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="ModelScreen"
-        component={ModalScreen}
+        name="MapScreen"
+        component={MapScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="MapScreen"
-        component={MapScreen}
+        name="SettingScreen"
+        component={SettingScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="AnalysisScreen"
+        component={AnalysisScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-const ModalScreen = ({ modalVisible, setModalVisible }) => {
+const ModalComponent = ({ modalVisible, setModalVisible }) => {
   return (
     <Modal
       animationType="slide"
@@ -93,4 +93,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ModalScreen;
+export default ModalComponent;
