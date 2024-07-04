@@ -1,16 +1,35 @@
-import React from "react";
-import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  Modal,
+  ScrollView,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 
 export default function DroneDetailsScreen() {
   const navigation = useNavigation();
+  const [isCameraModalVisible, setCameraModalVisible] = useState(false);
+  const [isVideoModalVisible, setVideoModalVisible] = useState(false);
+
+  const toggleCameraModal = () => {
+    setCameraModalVisible(!isCameraModalVisible);
+  };
+
+  const toggleVideoModal = () => {
+    setVideoModalVisible(!isVideoModalVisible);
+  };
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.iconWrapper}
-        onPress={() => navigation.goBack()}>
+        onPress={() => navigation.goBack()}
+      >
         <MaterialIcons name="arrow-back" size={30} color="white" />
       </TouchableOpacity>
       <Text style={styles.title}>Drone Details</Text>
@@ -48,7 +67,7 @@ export default function DroneDetailsScreen() {
       <View style={styles.CameraContainer}>
         <TouchableOpacity
           style={styles.bottombutton}
-          onPress={() => alert("Camera Details")}
+          onPress={toggleCameraModal}
         >
           <View style={styles.buttonContent}>
             <MaterialCommunityIcons name="camera" size={20} color="orange" />
@@ -57,13 +76,75 @@ export default function DroneDetailsScreen() {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.bottombutton}
-          onPress={() => alert("Video Details")} >
+          onPress={toggleVideoModal}
+        >
           <View style={styles.buttonContent}>
             <MaterialCommunityIcons name="video" size={20} color="orange" />
             <Text style={styles.buttonText}>Video Details</Text>
           </View>
         </TouchableOpacity>
       </View>
+
+      <Modal
+        visible={isCameraModalVisible}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={toggleCameraModal}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={toggleCameraModal}
+            >
+              <MaterialIcons name="close" size={24} color="black" />
+            </TouchableOpacity>
+            <MaterialCommunityIcons
+              name="camera"
+              size={30}
+              color="orange"
+              style={styles.bottomIcons}
+            />
+            <ScrollView style={styles.modalDetails}>
+              <Text style={styles.modalText}>
+                Sensor: 1/2.3" CMOS {"\n"}Lens: FOV 94° 20 mm (35 mm format
+                equivalent) f/2.8 {"\n"}ISO Range: Video: 100-3200 {"\n"}Photo:
+                100-1600 {"\n"}Shutter Speed: Electronic Shutter: 8-1/8000s
+              </Text>
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
+
+      <Modal
+        visible={isVideoModalVisible}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={toggleVideoModal}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={() => setVideoModalVisible(!isVideoModalVisible)}
+            >
+              <MaterialIcons name="close" size={24} color="black" />
+            </TouchableOpacity>
+            <MaterialCommunityIcons
+              name="video"
+              size={30}
+              color="orange"
+              style={styles.bottomIcons}
+            />
+            <ScrollView style={styles.modalDetails}>
+              <Text style={styles.modalText}>
+                Video Resolution: 4K Ultra HD {"\n"}Frame Rate: 30 fps{"\n"}
+                Video Transmission: 1080p{"\n"}Video Format: MP4 (H.264)
+              </Text>
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -184,5 +265,36 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    backgroundColor: "white",
+    padding: 20,
+    borderRadius: 10,
+    width: "80%",
+    alignItems: "center",
+  },
+  closeButton: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+  },
+  modalDetails: {
+    width: "100%",
+  },
+  modalText: {
+    fontSize: 16,
+    marginBottom: 20,
+    marginTop: 10,
+  },
+  bottomIcons: {
+    backgroundColor: "black",
+    padding: 10,
+    borderRadius: 30
   },
 });

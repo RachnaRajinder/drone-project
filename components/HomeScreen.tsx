@@ -5,7 +5,8 @@ import TextComponent from "./TextComponent";
 import ButtonComponent from "./ButtonComponent";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
-import ModalScreen from "./ModalComponent";
+import ModalComponent from "./ModalComponent";
+
 
 
 const HomeScreen = () => {
@@ -119,7 +120,7 @@ const HomeScreen = () => {
         </View>
       </View>
       {/* Modal Component */}
-      <ModalScreen
+      <ModalComponent
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
       />
