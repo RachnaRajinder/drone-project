@@ -11,6 +11,8 @@ import MapScreen from "@/components/MapScreen";
 import SettingScreen from "@/components/SettingScreen";
 import AnalysisScreen from "@/components/AnalysisScreen";
 
+
+
 const Stack = createStackNavigator();
 
 const App = () => {

@@ -1,14 +1,35 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Modal } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Modal,
+  FlatList,
+} from "react-native";
 import { Video } from "expo-av";
 import { MaterialIcons } from "@expo/vector-icons";
-import TextComponent from "./TextComponent";
 import { useNavigation } from "@react-navigation/native";
 
-const VideoItem = ({ videos }) => {
+// Import the JSON data
+import videoData from "../Data/data.json";
+
+// Import the local video files
+const localVideos = {
+  "digital.mp4": require("../assets/video/digital.mp4"),
+  "dummy.mp4": require("../assets/video/dummy.mp4"),
+  "summer.mp4": require("../assets/video/summer.mp4"),
+};
+
+const VideoItem = () => {
   const navigation = useNavigation();
+  const [videos, setVideos] = useState([]);
   const [playingVideoId, setPlayingVideoId] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  useEffect(() => {
+    setVideos(videoData.videos);
+  }, []);
 
   const handleVideoPress = (video) => {
     if (video.id === playingVideoId) {
@@ -20,48 +41,49 @@ const VideoItem = ({ videos }) => {
     }
   };
 
+  const renderItem = ({ item: video }) => (
+    <View key={video.id} style={styles.card}>
+      <TouchableOpacity onPress={() => handleVideoPress(video)}>
+        <Video
+          source={localVideos[video.url]} // Use the local video file
+          style={styles.thumbnail}
+          resizeMode="cover"
+          shouldPlay={playingVideoId === video.id && !isModalVisible}
+          isLooping
+          useNativeControls={playingVideoId === video.id && !isModalVisible}
+        />
+        {playingVideoId !== video.id && (
+          <View style={styles.iconOverlay}>
+            <MaterialIcons name="play-circle-outline" size={35} color="white" />
+          </View>
+        )}
+      </TouchableOpacity>
+      <View style={styles.details}>
+        <Text style={styles.title}>{video.title}</Text>
+        <Text style={styles.duration}>{video.duration}</Text>
+        <Text style={styles.date}>
+          {new Date(video.timestamp).toLocaleDateString()}
+        </Text>
+      </View>
+    </View>
+  );
+
   return (
     <View style={styles.screen}>
       <View style={styles.header}>
-        <TouchableOpacity style={styles.iconWrapper}
+        <TouchableOpacity
+          style={styles.iconWrapper}
           onPress={() => navigation.goBack()}
         >
-          <MaterialIcons
-            name="arrow-back"
-            size={30}
-            color="white"
-          />
+          <MaterialIcons name="arrow-back" size={30} color="white" />
         </TouchableOpacity>
-        <TextComponent style={styles.recordtext}>Recorded Video</TextComponent>
+        <Text style={styles.recordtext}>Recorded Video</Text>
       </View>
-      {videos.map((video) => (
-        <View key={video.id} style={styles.card}>
-          <TouchableOpacity onPress={() => handleVideoPress(video)}>
-            <Video
-              source={video.thumbnail}
-              style={styles.thumbnail}
-              resizeMode="cover"
-              shouldPlay={playingVideoId === video.id && !isModalVisible}
-              isLooping
-              useNativeControls={playingVideoId === video.id && !isModalVisible}
-            />
-            {playingVideoId !== video.id && (
-              <View style={styles.iconOverlay}>
-                <MaterialIcons
-                  name="play-circle-outline"
-                  size={35}
-                  color="white"
-                />
-              </View>
-            )}
-          </TouchableOpacity>
-          <View style={styles.details}>
-            <Text style={styles.title}>{video.title}</Text>
-            <Text style={styles.duration}>{video.duration}</Text>
-            <Text style={styles.date}>{video.date}</Text>
-          </View>
-        </View>
-      ))}
+      <FlatList
+        data={videos}
+        renderItem={renderItem}
+        keyExtractor={(video) => video.id.toString()}
+      />
 
       {playingVideoId && (
         <Modal
@@ -75,7 +97,9 @@ const VideoItem = ({ videos }) => {
           <View style={styles.modalContainer}>
             <Video
               source={
-                videos.find((video) => video.id === playingVideoId).thumbnail
+                localVideos[
+                  videos.find((video) => video.id === playingVideoId).url
+                ]
               }
               style={styles.fullscreenVideo}
               resizeMode="contain"
@@ -91,7 +115,7 @@ const VideoItem = ({ videos }) => {
               }}
             >
               <View style={styles.closeIconWrapper}>
-                <MaterialIcons name="close" size={35} color="white" />
+                <MaterialIcons name="close" size={18} color="white" />
               </View>
             </TouchableOpacity>
           </View>
@@ -182,7 +206,7 @@ const styles = StyleSheet.create({
     right: 20,
   },
   closeIconWrapper: {
-    backgroundColor: "red",
+    backgroundColor: "grey",
     borderRadius: 18,
     padding: 5,
   },

@@ -6,6 +6,7 @@ import ButtonComponent from "./ButtonComponent";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import ModalComponent from "./ModalComponent";
+import FooterComponent from "./FooterComonent";
 
 
 
@@ -85,40 +86,7 @@ const HomeScreen = () => {
         </View>
       </View>
       {/* footer */}
-      <View style={styles.footer}>
-        <View style={styles.footerIcon}>
-          <Ionicons
-            name="home"
-            size={35}
-            color="white"
-            onPress={() => alert("Home")}
-          />
-        </View>
-        <View style={styles.footerIcon}>
-          <Ionicons
-            name="settings"
-            size={35}
-            color="white"
-            onPress={() => navigation.navigate("SettingScreen")}
-          />
-        </View>
-        <View style={styles.footerIcon}>
-          <Ionicons
-            name="document"
-            size={35}
-            color="white"
-            onPress={() => navigation.navigate("VideoListScreen")}
-          />
-        </View>
-        <View style={styles.footerIcon}>
-          <Ionicons
-            name="analytics"
-            size={35}
-            color="white"
-            onPress={() => navigation.navigate("AnalysisScreen")}
-          />
-        </View>
-      </View>
+      <FooterComponent />
       {/* Modal Component */}
       <ModalComponent
         modalVisible={modalVisible}
@@ -240,19 +208,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
     marginLeft: 5,
-  },
-  footer: {
-    backgroundColor: "black",
-    flexDirection: "row",
-    justifyContent: "center", // Center the icons horizontally
-    paddingHorizontal: 20,
-    paddingBottom: 20,
-  },
-  footerIcon: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    top: 10,
   },
 });
 
