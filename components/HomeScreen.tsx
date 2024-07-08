@@ -35,7 +35,7 @@ const HomeScreen = () => {
       {/* sub header */}
       <View style={styles.subHeader}>
         <Image
-          source={require("../assets/logo.png")}
+          source={require("../assets/images/logo.png")}
           style={styles.droneImage}
         />
       </View>

@@ -24,13 +24,6 @@ const videoItems = [
     duration: "00:11",
     date: "2021-01-01",
   },
-  {
-    id: 4,
-    thumbnail: require("../assets/video/sunset.mp4"),
-    title: "Title",
-    duration: "00:09",
-    date: "2021-01-01",
-  },
 ];
 
 const VideoListScreen = () => {

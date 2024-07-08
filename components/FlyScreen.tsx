@@ -15,7 +15,7 @@ const FlyScreen = () => {
     const navigation = useNavigation();
   return (
     <ImageBackground
-      source={require("../assets/flyview.jpeg")}
+      source={require("../assets/images/flyview.jpeg")}
       style={styles.background}
     >
       <View style={styles.header}>
@@ -33,7 +33,7 @@ const FlyScreen = () => {
         </TouchableOpacity>
       </View>
 
-      <Image source={require("../assets/drone.png")} style={styles.drone} />
+      <Image source={require("../assets/images/drone.png")} style={styles.drone} />
 
       <View style={styles.infoContainer}>
         <View style={styles.info}>

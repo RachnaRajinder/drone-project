@@ -11,33 +11,33 @@ const FooterComponent = () => {
       <View style={styles.footerIcon}>
         <Ionicons
           name="home"
-          size={35}
-          color="white"
+          size={30}
+          color="orange"
           onPress={() => alert("Home")}
-        />
-      </View>
-      <View style={styles.footerIcon}>
-        <Ionicons
-          name="settings"
-          size={35}
-          color="white"
-          onPress={() => navigation.navigate("SettingScreen")}
-        />
-      </View>
-      <View style={styles.footerIcon}>
-        <Ionicons
-          name="document"
-          size={35}
-          color="white"
-          onPress={() => navigation.navigate("VideoListScreen")}
         />
       </View>
       <View style={styles.footerIcon}>
         <Ionicons
           name="analytics"
           size={35}
-          color="white"
+          color="orange"
           onPress={() => navigation.navigate("AnalysisScreen")}
+        />
+      </View>
+      <View style={styles.footerIcon}>
+        <Ionicons
+          name="images"
+          size={30}
+          color="orange"
+          onPress={() => navigation.navigate("VideoListScreen")}
+        />
+      </View>
+      <View style={styles.footerIcon}>
+        <Ionicons
+          name="settings"
+          size={30}
+          color="orange"
+          onPress={() => navigation.navigate("SettingScreen")}
         />
       </View>
     </View>

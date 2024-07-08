@@ -26,6 +26,7 @@ const ModalComponent = ({ modalVisible, setModalVisible }) => {
     if (!result.canceled) {
       setProfileImage({ uri: result.assets[0].uri });
     }
+    
   };
   return (
     <Modal

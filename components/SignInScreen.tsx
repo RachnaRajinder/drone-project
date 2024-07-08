@@ -32,7 +32,7 @@ const SignInScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../assets/logo.png")}
+        source={require("../assets/images/logo.png")}
         style={{ width: 150, height: 80, alignSelf: "center" }}
       />
       <View style={styles.signUpCard}>

@@ -1,78 +1,124 @@
-// AnalysisScreen.js
 import React from "react";
-import { View, Text, ScrollView, StyleSheet, Dimensions } from "react-native";
-import { PieChart, BarChart } from "react-native-chart-kit";
+import { StyleSheet, View, ScrollView, Text, TouchableOpacity } from "react-native";
+import { LineChart, PieChart, BarChart } from "react-native-chart-kit";
+import { Dimensions } from "react-native";
+import { Card } from "react-native-elements";
+import { MaterialIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const screenWidth = Dimensions.get("window").width;
 
-const data = [
-  {
-    name: "Flight Time",
-    population: 21500000,
-    color: "#f00",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15,
-  },
-  {
-    name: "Battery Life",
-    population: 2800000,
-    color: "#0f0",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15,
-  },
-  {
-    name: "Signal Strength",
-    population: 527612,
-    color: "#00f",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15,
-  },
-];
-
-const barData = {
-  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-  datasets: [
-    {
-      data: [20, 45, 28, 80, 99, 43],
-    },
-  ],
-};
-
-const chartConfig = {
-  backgroundGradientFrom: "#1E2923",
-  backgroundGradientTo: "#08130D",
-  color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-  strokeWidth: 2,
-  barPercentage: 0.5,
-};
-
 const AnalysisScreen = () => {
+  const navigation = useNavigation();
+
+  const chartConfig = {
+    backgroundGradientFrom: "#1E2923",
+    backgroundGradientTo: "#08130D",
+    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+    strokeWidth: 2,
+    barPercentage: 0.5,
+    useShadowColorFromDataset: false,
+  };
+
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.header}>Drone Analysis</Text>
-      <View style={styles.chartContainer}>
-        <Text style={styles.chartTitle}>Pie Chart</Text>
+      <View style={styles.subContainer}>
+        <TouchableOpacity
+          style={styles.iconWrapper}
+          onPress={() => navigation.goBack()}
+        >
+          <MaterialIcons name="arrow-back" size={30} color="white" />
+        </TouchableOpacity>
+        <Text style={styles.title}>Statistics</Text>
+      </View>
+
+      <View style={styles.dateContainer}>
+        <Text style={styles.dateText}>MON</Text>
+        <Text style={styles.dateText}>TUE</Text>
+        <Text style={styles.dateText}>WED</Text>
+        <Text style={styles.dateText}>THU</Text>
+        <Text style={styles.dateText}>FRI</Text>
+        <Text style={styles.dateText}>SAT</Text>
+        <Text style={styles.dateText}>SUN</Text>
+      </View>
+      <Card containerStyle={styles.card}>
+        <Text style={styles.cardTitle}>Drone Analytics</Text>
         <PieChart
-          data={data}
-          width={screenWidth}
+          data={[
+            {
+              name: "Training",
+              population: 40,
+              color: "rgba(64, 165, 244, 1)", // Blue color for Training
+              legendFontColor: "#fff",
+              legendFontSize: 15,
+            },
+            {
+              name: "Mapping",
+              population: 30,
+              color: "#FFD700", // Gold color for Mapping
+              legendFontColor: "#fff",
+              legendFontSize: 15,
+            },
+            {
+              name: "Inspection",
+              population: 20,
+              color: "#32CD32", // Green color for Inspection
+              legendFontColor: "#fff",
+              legendFontSize: 15,
+            },
+            {
+              name: "Other",
+              population: 10,
+              color: "#FF6347", // Red color for Other
+              legendFontColor: "#fff",
+              legendFontSize: 15,
+            },
+          ]}
+          width={screenWidth - 40}
           height={220}
           chartConfig={chartConfig}
           accessor="population"
           backgroundColor="transparent"
           paddingLeft="15"
-          absolute
         />
-      </View>
-      <View style={styles.chartContainer}>
-        <Text style={styles.chartTitle}>Bar Chart</Text>
+      </Card>
+      <Card containerStyle={styles.card}>
+        <Text style={styles.cardTitle}>FLIGHT DISTANCE</Text>
         <BarChart
-          data={barData}
-          width={screenWidth}
+          data={{
+            labels: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN"],
+            datasets: [
+              {
+                data: [20, 45, 28, 80, 99, 43],
+              },
+            ],
+          }}
+          width={screenWidth - 40}
           height={220}
           chartConfig={chartConfig}
-          verticalLabelRotation={40}
+          verticalLabelRotation={30}
         />
-      </View>
+      </Card>
+      <Card containerStyle={styles.card}>
+        <Text style={styles.cardTitle}>AVERAGE ALTITUDE</Text>
+        <LineChart
+          data={{
+            labels: ["1", "2", "3", "4", "5", "6"],
+            datasets: [
+              {
+                data: [5, 4, 6, 7, 8, 6],
+                color: (opacity = 1) => `rgba(64, 165, 244, ${opacity})`,
+                strokeWidth: 2,
+              },
+            ],
+          }}
+          width={screenWidth - 40}
+          height={220}
+          yAxisLabel=""
+          chartConfig={chartConfig}
+          bezier
+        />
+      </Card>
     </ScrollView>
   );
 };
@@ -80,23 +126,46 @@ const AnalysisScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: "#000", 
   },
-  header: {
-    fontSize: 24,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginVertical: 20,
-  },
-  chartContainer: {
-    marginVertical: 20,
+  subContainer: {
+    flexDirection: "row",
     alignItems: "center",
-  },
-  chartTitle: {
-    fontSize: 18,
+    margin: 10,
+  },  
+  title: {
+    fontSize: 24,
+    color: "orange",
+    textAlign: "center",
+    marginVertical: 10,
+    marginHorizontal: 20,
     fontWeight: "bold",
+  },
+  iconWrapper: {
+    backgroundColor: "#333",
+    borderRadius: 20,
+    padding: 5,
+    margin: 10,
+    alignSelf: "flex-start",
+  },
+  dateContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginVertical: 10,
+  },
+  dateText: {
+    color: "orange",
+    fontSize: 14,
+  },
+  card: {
+    backgroundColor: "#333",
+    borderColor: "#444",
+  },
+  cardTitle: {
+    fontSize: 18,
+    color: "orange",
+    textAlign: "center",
     marginBottom: 10,
-    color: "white",
   },
 });
 

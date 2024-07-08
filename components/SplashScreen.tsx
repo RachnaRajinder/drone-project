@@ -24,7 +24,7 @@ const SplashScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Image source={require("../assets/splash.jpeg")} style={styles.image} />
+      <Image source={require("../assets/images/splash.jpeg")} style={styles.image} />
       <View style={styles.overlay}>
         <Animated.View style={{ ...styles.textContainer, opacity: fadeAnim }}>
           <Text style={styles.text}>

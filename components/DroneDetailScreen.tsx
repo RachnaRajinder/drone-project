@@ -34,7 +34,7 @@ export default function DroneDetailsScreen() {
       </TouchableOpacity>
       <Text style={styles.title}>Drone Details</Text>
       <Image
-        source={require("../assets/parrot.png")} // Update this path to your image
+        source={require("../assets/images/parrot.png")} // Update this path to your image
         style={styles.droneImage}
       />
       <Text style={styles.droneName}>SkySight 3</Text>
