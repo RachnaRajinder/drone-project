@@ -1,28 +1,28 @@
 {
-  "videos": [
-    {
-      "id": 1,
-      "title": "Video 1",
-      "duration": "00:00:00",
-      "url": "dummy.mp4",
-      "thumbnail": "dummy.mp4",
-      "timestamp": "2021-01-01T10:00:00Z"
-    },
-    {
-      "id": 2,
-      "title": "Video 2",
-      "duration": "00:00:00",
-      "url": "digital.mp4",
-      "thumbnail": "digital.mp4",
-      "timestamp": "2021-01-02T10:00:00Z"
-    },
-    {
-      "id": 3,
-      "title": "Video 3",
-      "duration": "00:00:00",
-      "url": "summer.mp4",
-      "thumbnail": "summer.mp4",
-      "timestamp": "2021-01-03T10:00:00Z"
-    }
-  ]
+    "videos": [
+        {
+            "id": 1,
+            "title": "Video 1",
+            "duration": "00:00:00",
+            "url": "dummy.mp4",
+            "thumbnail": "dummy2.mp4",
+            "timestamp": "2021-01-01T10:00:00Z"
+        },
+        {
+            "id": 2,
+            "title": "Video 2",
+            "duration": "00:00:00",
+            "url": "digital.mp4",
+            "thumbnail": "digital.mp4",
+            "timestamp": "2021-01-02T10:00:00Z"
+        },
+        {
+            "id": 3,
+            "title": "Video 3",
+            "duration": "00:00:00",
+            "url": "summer.mp4",
+            "thumbnail": "summer.mp4",
+            "timestamp": "2021-01-03T10:00:00Z"
+        }
+    ]
 }

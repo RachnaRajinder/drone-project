@@ -26,13 +26,15 @@ export default function DroneDetailsScreen() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.iconWrapper}
-        onPress={() => navigation.goBack()}
-      >
-        <MaterialIcons name="arrow-back" size={30} color="white" />
-      </TouchableOpacity>
-      <Text style={styles.title}>Drone Details</Text>
+      <View style={styles.subContainer}>
+        <TouchableOpacity
+          style={styles.iconWrapper}
+          onPress={() => navigation.goBack()}
+        >
+          <MaterialIcons name="arrow-back" size={30} color="white" />
+        </TouchableOpacity>
+        <Text style={styles.title}>Drone Details</Text>
+      </View>
       <Image
         source={require("../assets/images/parrot.png")} // Update this path to your image
         style={styles.droneImage}
@@ -154,33 +156,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#1c1c1e",
     alignItems: "center",
-    paddingTop: 50,
+    paddingTop: 20,
   },
-  backButton: {
-    position: "absolute",
-    top: 40,
-    left: 20,
-  },
-  backButtonText: {
-    color: "#fff",
-    fontSize: 24,
-  },
-  iconWrapper: {
-    position: "absolute",
-    top: 40,
-    left: 20,
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
-    borderRadius: 20,
-    padding: 5,
-    marginRight: 10,
-    marginBottom: 10,
-    marginLeft: 5,
+  subContainer: {
+    flexDirection: "row",
+    right:50,
   },
   title: {
-    color: "#fff",
-    fontSize: 20,
+    fontSize: 24,
+    color: "orange",
+    textAlign: "center",
+    marginVertical: 10,
+    marginHorizontal: 15,
     fontWeight: "bold",
-    marginBottom: 20,
+  },
+  iconWrapper: {
+    backgroundColor: "#333",
+    borderRadius: 20,
+    padding: 5,
+    margin: 10,
   },
   droneImage: {
     width: 400,
@@ -295,6 +289,6 @@ const styles = StyleSheet.create({
   bottomIcons: {
     backgroundColor: "black",
     padding: 10,
-    borderRadius: 30
+    borderRadius: 30,
   },
 });

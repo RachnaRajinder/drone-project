@@ -9,9 +9,6 @@ import {
 } from "react-native";
 import { Video } from "expo-av";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-
-// Import the JSON data
 import videoData from "../Data/data.json";
 
 // Import the local video files
@@ -22,7 +19,6 @@ const localVideos = {
 };
 
 const VideoItem = () => {
-  const navigation = useNavigation();
   const [videos, setVideos] = useState([]);
   const [playingVideoId, setPlayingVideoId] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -45,7 +41,6 @@ const VideoItem = () => {
     <View key={video.id} style={styles.card}>
       <TouchableOpacity onPress={() => handleVideoPress(video)}>
         <Video
-          source={localVideos[video.url]} // Use the local video file
           style={styles.thumbnail}
           resizeMode="cover"
           shouldPlay={playingVideoId === video.id && !isModalVisible}
@@ -70,15 +65,6 @@ const VideoItem = () => {
 
   return (
     <View style={styles.screen}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.iconWrapper}
-          onPress={() => navigation.goBack()}
-        >
-          <MaterialIcons name="arrow-back" size={30} color="white" />
-        </TouchableOpacity>
-        <Text style={styles.recordtext}>Recorded Video</Text>
-      </View>
       <FlatList
         data={videos}
         renderItem={renderItem}
@@ -115,7 +101,7 @@ const VideoItem = () => {
               }}
             >
               <View style={styles.closeIconWrapper}>
-                <MaterialIcons name="close" size={18} color="white" />
+                <MaterialIcons name="close" size={35} color="white" />
               </View>
             </TouchableOpacity>
           </View>
@@ -128,20 +114,7 @@ const VideoItem = () => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "black",
     padding: 10,
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  iconWrapper: {
-    backgroundColor: "#333",
-    borderRadius: 20,
-    padding: 5,
-    marginRight: 10,
-    marginBottom: 10,
-    marginLeft: 5,
   },
   card: {
     backgroundColor: "#333",
@@ -152,6 +125,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 1,
     borderColor: "#444",
+    width: "100%",
+    height: 80,
   },
   thumbnail: {
     width: 100,
@@ -174,13 +149,6 @@ const styles = StyleSheet.create({
   date: {
     fontSize: 12,
     color: "#aaa",
-  },
-  recordtext: {
-    fontSize: 28,
-    fontWeight: "bold",
-    color: "orange",
-    marginLeft: 10,
-    marginBottom: 20,
   },
   iconOverlay: {
     position: "absolute",
@@ -206,7 +174,7 @@ const styles = StyleSheet.create({
     right: 20,
   },
   closeIconWrapper: {
-    backgroundColor: "grey",
+    backgroundColor: "red",
     borderRadius: 18,
     padding: 5,
   },

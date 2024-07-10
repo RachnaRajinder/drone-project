@@ -1,0 +1,19 @@
+{
+    "images" : [
+        {
+            "id": 11,
+            "url": "../assets/images/user.jpg",
+            "type":"photo"
+        },
+        {
+          "id": 22,
+          "url": "../assets/images/user.jpg",
+            "type":"photo"
+        },
+        {
+          "id": 33,
+          "url": "../assets/images/user.jpg",
+            "type":"photo"
+        }
+    ]
+}

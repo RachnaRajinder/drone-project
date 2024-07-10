@@ -10,6 +10,7 @@ import DroneDetailScreen from "@/components/DroneDetailScreen";
 import MapScreen from "@/components/MapScreen";
 import SettingScreen from "@/components/SettingScreen";
 import AnalysisScreen from "@/components/AnalysisScreen";
+import GalleryScreen from "@/components/GalleryScreen";
 
 
 
@@ -66,6 +67,11 @@ const App = () => {
       <Stack.Screen
         name="AnalysisScreen"
         component={AnalysisScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="GalleryScreen"
+        component={GalleryScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
