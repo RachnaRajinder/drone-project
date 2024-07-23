@@ -11,6 +11,7 @@ import MapScreen from "@/components/MapScreen";
 import SettingScreen from "@/components/SettingScreen";
 import AnalysisScreen from "@/components/AnalysisScreen";
 import GalleryScreen from "@/components/GalleryScreen";
+import { UserProvider } from "@/components/UserContext";
 
 
 
@@ -18,6 +19,7 @@ const Stack = createStackNavigator();
 
 const App = () => {
   return (
+    <UserProvider>
     <Stack.Navigator initialRouteName="SplashScreen">
       <Stack.Screen
         name="SplashScreen"
@@ -75,6 +77,7 @@ const App = () => {
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
+    </UserProvider>
   );
 };
 

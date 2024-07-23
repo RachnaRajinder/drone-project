@@ -6,29 +6,63 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
+  Alert,
 } from "react-native";
+import { UserContext } from "./UserContext";
 
 const SignInScreen = ({ navigation }) => {
+  const { setUser } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState({});
 
-  const handleSignIn = () => {
+  const Api_URL = "http://192.168.0.103:3000/login"; 
+  
+  const handleSignIn = async () => {
     let errors = {};
+
     if (!email) {
       errors.email = "Email is required";
     }
+
     if (!password) {
       errors.password = "Password is required";
     }
+
     setError(errors);
-    if (Object.keys(errors).length === 0) {
-      // Clear the form and navigate to home
-      setEmail("");
-      setPassword("");
-      navigation.navigate("Home");
+
+    if (Object.keys(errors).length > 0) {
+      return;
     }
-  };
+
+    const user = {
+      email,
+      password,
+    };
+
+    try {
+      const response = await fetch(Api_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setUser(data);
+        Alert.alert("Login successful");
+        navigation.navigate("Home");
+      } else {
+        const data = await response.json();
+        setError({ ...errors, ...data });
+        Alert.alert("Login failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
   return (
     <View style={styles.container}>
       <Image

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -6,16 +6,21 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
+  Alert,
 } from "react-native";
 import Checkbox from "expo-checkbox";
+import { UserContext } from "./UserContext"; // Import UserContext
 
 const SignUpScreen = ({ navigation }) => {
+  const { setUser } = useContext(UserContext); // Get setUser from context
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [isSelected, setSelection] = useState(false);
   const [error, setError] = useState({});
+  const [isLoading, setLoading] = useState(false);
+
+  const Api_URL = "http://192.168.0.103:3000/users"; // Ensure port if needed
 
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -23,31 +28,30 @@ const SignUpScreen = ({ navigation }) => {
   };
 
   const validatePassword = (password) => {
-    const re = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    const re = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
     return re.test(password);
   };
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     let errors = {};
+
     if (!username) {
       errors.username = "Username is required";
     }
+
     if (!email) {
       errors.email = "Email is required";
     } else if (!validateEmail(email)) {
       errors.email = "Invalid email format";
     }
+
     if (!password) {
       errors.password = "Password is required";
     } else if (!validatePassword(password)) {
       errors.password =
-        "Password must be at least 8 characters long and include letters, numbers, and special characters.";
+        "Password must be at least 6 characters long and include letters, numbers, and special characters.";
     }
-    if (!confirmPassword) {
-      errors.confirmPassword = "Confirm Password is required";
-    } else if (password !== confirmPassword) {
-      errors.confirmPassword = "Password does not match";
-    }
+
     if (!isSelected) {
       errors.checkbox = "You must accept the terms and policy";
     }
@@ -55,13 +59,42 @@ const SignUpScreen = ({ navigation }) => {
     setError(errors);
 
     if (Object.keys(errors).length === 0) {
-      // Clear the form and navigate to home
-      setUsername("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-      setSelection(false);
-      navigation.navigate("Home");
+      setLoading(true);
+
+      const userData = {
+        name: username,
+        email: email,
+        password: password,
+      };
+
+      try {
+        const response = await fetch(Api_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          console.log("Success:", data);
+          setUser(data); // Store user data in context
+          setUsername("");
+          setEmail("");
+          setPassword("");
+          setSelection(false);
+          navigation.navigate("Home");
+        } else {
+          setError({ api: "Failed to sign up. Please try again later." });
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        setError({ api: "Failed to sign up. Please try again later." });
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -78,6 +111,7 @@ const SignUpScreen = ({ navigation }) => {
           placeholder="Username"
           value={username}
           onChangeText={setUsername}
+          autoCapitalize="none"
         />
         {error.username && (
           <Text style={styles.errorText}>{error.username}</Text>
@@ -88,6 +122,7 @@ const SignUpScreen = ({ navigation }) => {
           value={email}
           onChangeText={setEmail}
           keyboardType="email-address"
+          autoCapitalize="none"
         />
         {error.email && <Text style={styles.errorText}>{error.email}</Text>}
         <TextInput
@@ -96,36 +131,24 @@ const SignUpScreen = ({ navigation }) => {
           value={password}
           onChangeText={setPassword}
           secureTextEntry
+          autoCapitalize="none"
         />
         {error.password && (
           <Text style={styles.errorText}>{error.password}</Text>
         )}
-        <TextInput
-          style={styles.input}
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-          secureTextEntry
-        />
-        {error.confirmPassword && (
-          <Text style={styles.errorText}>{error.confirmPassword}</Text>
-        )}
         <View style={styles.checkboxContainer}>
           <Checkbox
             value={isSelected}
-            onValueChange={setSelection}
-            style={styles.checkbox}
+            onValueChange={() => setSelection(!isSelected)}
+            color={isSelected ? "#F0935F" : "#ccc"}
           />
           <Text style={styles.label}>
             I accept your <Text style={styles.link}>terms</Text> and{" "}
             <Text style={styles.link}>policy</Text>
           </Text>
         </View>
-        {error.checkbox && (
-          <Text style={styles.errorText}>{error.checkbox}</Text>
-        )}
         <TouchableOpacity
-          style={styles.button}
+          style={[styles.button, !isSelected && styles.buttonDisabled]}
           onPress={handleSignUp}
           disabled={!isSelected}
         >
@@ -136,6 +159,7 @@ const SignUpScreen = ({ navigation }) => {
             Have an account? <Text style={styles.link}>Sign In</Text>
           </Text>
         </TouchableOpacity>
+        {error.api && <Text style={styles.errorText}>{error.api}</Text>}
       </View>
     </View>
   );
@@ -195,6 +219,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 8,
     marginBottom: 20,
+  },
+  buttonDisabled: {
+    backgroundColor: "#F0935F90",
   },
   buttonText: {
     color: "#fff",
