@@ -8,16 +8,16 @@ import {
   Image,
   Alert,
 } from "react-native";
-import { UserContext } from "./UserContext";
+
 
 const SignInScreen = ({ navigation }) => {
-  const { setUser } = useContext(UserContext);
+  const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState({});
 
-  const Api_URL = "http://192.168.0.103:3000/login"; 
-  
+  const Api_URL = "http://192.168.0.103:3000/users/login";
+
   const handleSignIn = async () => {
     let errors = {};
 
@@ -62,7 +62,7 @@ const SignInScreen = ({ navigation }) => {
     } catch (error) {
       console.error("Error:", error);
     }
-  }
+  };
   return (
     <View style={styles.container}>
       <Image

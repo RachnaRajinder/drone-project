@@ -26,11 +26,12 @@ const SignUpScreen = ({ navigation }) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   };
-
+  
   const validatePassword = (password) => {
+    // Minimum 6 characters at least 1 Alphabet, 1 Number and 1 Special Character
     const re = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
     return re.test(password);
-  };
+  }
 
   const handleSignUp = async () => {
     let errors = {};
@@ -49,7 +50,7 @@ const SignUpScreen = ({ navigation }) => {
       errors.password = "Password is required";
     } else if (!validatePassword(password)) {
       errors.password =
-        "Password must be at least 6 characters long and include letters, numbers, and special characters.";
+        "Password minimum 6 characters at least 1 Alphabet, 1 Number and 1 Special Character";
     }
 
     if (!isSelected) {
@@ -80,6 +81,7 @@ const SignUpScreen = ({ navigation }) => {
 
         if (response.ok) {
           console.log("Success:", data);
+          Alert.alert("Sign Up Successful", "You can now sign in.");
           setUser(data); // Store user data in context
           setUsername("");
           setEmail("");
@@ -87,7 +89,8 @@ const SignUpScreen = ({ navigation }) => {
           setSelection(false);
           navigation.navigate("Home");
         } else {
-          setError({ api: "Failed to sign up. Please try again later." });
+          setError({ api: "User already signup." });
+          Alert.alert("Sign Up Failed", "User already signup.");
         }
       } catch (error) {
         console.error("Error:", error);
